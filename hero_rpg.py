@@ -6,43 +6,72 @@
 # 2. do nothing - in which case the goblin will attack him anyway
 # 3. flee
 
-class Hero:
+class Character:
     def __init__(self,health,power):
         self.health = health
         self.power = power
     def attack(self, enemy):
         enemy.health -= self.power
-    def alive(self, health):
+    def alive(self ,health):
         if health > 0:
             return True
         else:
             False
-    def print_status(self, health):
-        
 
 
-class Goblin:
-    def __init__(self, health, power):
+
+class Hero(Character):
+    def hero (self,health,power):
         self.health = health
         self.power = power
-    def attack(self, hero):
-        hero.health -= self.power
-    def alive(self, health):
-        if health > 0:
-            return True
-        else:
-            False
+    # def attack(self, enemy):
+        # enemy.health -= self.power
+    # def alive(self, health):
+    #     if health > 0:
+    #         return True
+    #     else:
+    #         False
+    def hero_status(self, health):
+        print(f"You have {self.health} health and {self.power} power.")
+
+
+class Goblin(Character):
+    def enemy(self, health, power):
+        self.health = health
+        self.power = power
+    # def attack(self, hero):
+        # hero.health -= self.power
+    # def alive(self, health):
+    #     if health > 0:
+    #         return True
+    #     else:
+    #         False
+    def goblin_status(self, health):
+        print(f"The goblin has {self.health} health and {self.power} power.")
+
+# class Zombie(Character):
+#     def enemy(self, health, power):
+#         self.health = health
+#         self.power = power
+#     def rise_from_dead(self, health):
+#         if health == 0:
+#             health += 10
+#         print('The Zombie has risen again!  He has regained 10 health!')
+        
+
+    
+
+
 
 
 def main():
-    hero = Hero(10,5)
-    goblin = Goblin(6,2)
-    
+    hero = Hero(25,5)
+    goblin = Goblin(15,2)    
 
     while goblin.alive(goblin.health) and hero.alive(hero.health):
-        print(f"You have {hero.health} health and {hero.power} power.".format(hero.health, hero.power))
-        print("The goblin has {} health and {} power.".format(goblin.health, goblin.power))
-        print()
+        
+        hero.hero_status(hero.health)
+        goblin.goblin_status(goblin.health)        
         print("What do you want to do?")
         print("1. fight goblin")
         print("2. do nothing")
