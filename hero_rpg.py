@@ -26,11 +26,20 @@ class Character:
 
 
 class Hero(Character):
-    def hero (self,health,power):
+    def hero (self,health,power,gold):
         self.health = health
         self.power = power
+        self.gold = gold
     def hero_status(self, health):
         print(f"You have {self.health} health and {self.power} power.")
+    def hero_gold(self, gold):
+        self.gold += 20
+        print(f'you currently have {self.gold} peices of gold!')
+    # def critical_hit(self,power):
+    #     if (random.randint(1,5) == 5):
+    #         self.power * 2
+    #     print('You landed a critical hit!')
+    
 
 
 
@@ -84,28 +93,41 @@ class Mage(Enemy): # 'Medic'
             print('The Mage uses Regenerate to reclaim 2 health!')
         else:
             return False
-    
-# class Store:
-#     def __init__(self):
-#         self.item = item
-#     def inventory(self, item):
+
+
 
 def store():
-    weapons = [['Sword of 1000 Truths', 50], ['Axe of Fury', 10], ['Mace of Riteousness', 25], ['Bow of The Elves', 30]]
-    potions = [['potion of the Healer', 10], ['potion of the Warrior', 40], ['draught of The Destroyer', 100]]
+    weapon = 50
+    potion = 20
     
-    print('Welcome to the Market.  What would you like to see?')
+    
+    
+    print('Welcome to the Market.')
     print('1.) WEAPONS')
     print('2.) POTIONS')
     print('3.) EXIT MARKET')
     inventory = input()
     if inventory == '1':
-        print(weapons)
+        raw_input = input(f'do you want to purchase the legendary SWORD OF 1000 TRUTHS for {weapon}? TYPE YES OR NO' )
+        if raw_input == 'yes':
+            print('you have acquired the SWORD OF 1000 TRUTHS! Your power is raised by double!')
+        else:
+            print('ok!')
+            store()
     if inventory == '2':
-        print(potions)
+        raw_input = input(f'do you want to purchase the helpful POTION OF THE HEALER for {potion}? TYPE YES OR NO ')
+        if raw_input == 'yes':
+            print('you have acquired the POTION OF THE HEALER!  10 health is added!')
+        else:
+            print('ok!')
+            store()
+        for x in zip(potion):
+            print('--------------------')
+            print(x)
     if inventory == '3':
         print('Come back when you want to spend!')
         main()
+    
 
 
 
@@ -159,11 +181,12 @@ def battle():
     enemy = random.choice(enemyList)
     hero = Hero(25,5)
     # enemy = enemy()
+    
+
 
     while enemy.alive(enemy.health) and hero.alive(hero.health):
     
-        hero.hero_status(hero.health)
-        enemy.enemy_status(enemy.health)
+        
 
         
         print(f'''
@@ -172,6 +195,9 @@ def battle():
                 A {enemy.name} EMERGES!
                 '''
         )   
+        hero.hero_status(hero.health)
+        enemy.enemy_status(enemy.health)
+
         print("What do you want to do?")
         print("1. fight!")
         print("2. do nothing")
@@ -182,7 +208,13 @@ def battle():
             hero.attack(enemy)
             print(f"You do {hero.power} damage to the enemy.")
             if enemy.health <= 0:
-                print("The enemy is dead.")
+                print("You have vanquished your enemy!.")
+                print( '''
+                ----------------------------
+                ''')
+                
+                print(f'The townspeople are so grateful for your ridding of this menace \n they reward you with 20 gold!')
+                
         elif raw_input == "2":
             print(f'you freeze in terror!')
         elif raw_input == "3":
@@ -197,14 +229,10 @@ def battle():
             print("{} damage was done!".format(enemy.power))
             if hero.health <= 0:
                 print("You are dead.")
-        if hero.alive(hero.health) == True:
-            return main()
+    return main()            
 
 
 intro()
 main()
 
-
-
-    
 
