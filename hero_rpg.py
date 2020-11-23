@@ -30,6 +30,11 @@ class Hero(Character):
         self.health = health
         self.power = power
         self.gold = gold
+    def attack(self, hero):
+        hero.health -= self.power
+        # if random.randint(1,10 <= 8):
+        #     self.power * 2
+        #     print('you make a critical hit!')
     def hero_status(self, health):
         print(f"You have {self.health} health and {self.power} power.")
     def hero_gold(self, gold):
@@ -97,7 +102,7 @@ class Mage(Enemy): # 'Medic'
 
 
 def store():
-    weapon = 50
+    weapon = 20
     potion = 20
     
     
@@ -108,16 +113,18 @@ def store():
     print('3.) EXIT MARKET')
     inventory = input()
     if inventory == '1':
-        raw_input = input(f'do you want to purchase the legendary SWORD OF 1000 TRUTHS for {weapon}? TYPE YES OR NO' )
-        if raw_input == 'yes':
+        raw_input = input(f'do you want to purchase the legendary SWORD OF 1000 TRUTHS for {weapon}? TYPE YES OR NO  ' )
+        if raw_input == 'yes'.lower():
             print('you have acquired the SWORD OF 1000 TRUTHS! Your power is raised by double!')
+            store()
         else:
             print('ok!')
             store()
     if inventory == '2':
-        raw_input = input(f'do you want to purchase the helpful POTION OF THE HEALER for {potion}? TYPE YES OR NO ')
-        if raw_input == 'yes':
+        raw_input = input(f'do you want to purchase the helpful POTION OF THE HEALER for {potion}? TYPE YES OR NO  ')
+        if raw_input == 'yes'.lower():
             print('you have acquired the POTION OF THE HEALER!  10 health is added!')
+            store()
         else:
             print('ok!')
             store()
@@ -160,7 +167,6 @@ def main():
                 You get too drunk and pass out!
                 
         ''')
-        
         main()
     elif raw_input == '4':
         print('Be gone, coward!!')
